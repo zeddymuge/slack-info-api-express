@@ -6,12 +6,15 @@ app.use(express.json());
 app.get('/api', (req, res) => {
     const { slack_name, track } = req.query;
     const now = new Date();
+    
+    // Explicitly set the time zone to UTC
+    now.setUTCHours(now.getUTCHours());
+    
     const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' });
     const utcTime = now.toISOString();
 
     if (!slack_name || !track) {
         return res.status(400).json({ error: 'slack_name and track required!' });
-
     }
 
     const githubRepoUrl = "https://github.com/zeddymuge/slack-info-api-express";
@@ -32,5 +35,5 @@ app.get('/api', (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`server is rumning on port ${port}`);
+    console.log(`server is running on port ${port}`);
 });
