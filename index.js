@@ -6,12 +6,10 @@ app.use(express.json());
 app.get('/api', (req, res) => {
     const { slack_name, track } = req.query;
     const now = new Date();
-    
-    // Explicitly set the time zone to UTC
-    now.setUTCHours(now.getUTCHours());
-    
     const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' });
-    const utcTime = now.toISOString();
+    
+    // Manually format the UTC time to match the required format
+    const utcTime = `${now.getUTCFullYear()}-${(now.getUTCMonth() + 1).toString().padStart(2, '0')}-${now.getUTCDate().toString().padStart(2, '0')}T${now.getUTCHours().toString().padStart(2, '0')}:${now.getUTCMinutes().toString().padStart(2, '0')}:${now.getUTCSeconds().toString().padStart(2, '0')}Z`;
 
     if (!slack_name || !track) {
         return res.status(400).json({ error: 'slack_name and track required!' });
