@@ -14,8 +14,8 @@ app.get('/api', (req, res) => {
 
     }
 
-    const githubRepoUrl = "https://github.com/zeddymuge";
-    const githubFileUrl = `${githubRepoUrl}/blob/main/file_name.ext`;
+    const githubRepoUrl = "https://github.com/zeddymuge/slack-info-api-express;
+    const githubFileUrl = `${githubRepoUrl}/blob/main/index.js`;
 
     const response = {
         slack_name,
