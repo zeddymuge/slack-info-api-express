@@ -9,8 +9,7 @@ app.get('/api', (req, res) => {
     const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' });
     
     // Manually format the UTC time to match the required format
-    const utcTime = `${now.getUTCFullYear()}-${(now.getUTCMonth() + 1).toString().padStart(2, '0')}-${now.getUTCDate().toString().padStart(2, '0')}T${now.getUTCHours().toString().padStart(2, '0')}:${now.getUTCMinutes().toString().padStart(2, '0')}:${now.getUTCSeconds().toString().padStart(2, '0')}Z`;
-
+    const utcTime = now.toISOString().slice(0, -5) + 'Z';
     if (!slack_name || !track) {
         return res.status(400).json({ error: 'slack_name and track required!' });
     }
